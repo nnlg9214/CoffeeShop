@@ -1,0 +1,83 @@
+{% extends '_Base.html' %}
+{% load humanize %}
+{% load static %}
+    {% block title %}
+        CoffeeShop® - {{danh_muc01.name}}
+    {% endblock %}
+
+    {% block content %}
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-dark bg-img p-5 mb-5">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="display-4 text-uppercase text-white">{{danh_muc01.name}}</h1>
+                <a href="/">Trang chủ</a>
+                <i class="far fa-square text-primary px-2"></i>
+                <a href="/danh-muc/{{danh_muc01.id}}/">{{danh_muc01.name}}</a>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Products Start -->
+    <div class="container-fluid about py-5">
+        <div class="container">
+            <div class="section-title position-relative text-center mx-auto mb-5 pb-3" style="max-width: 600px;">
+                <h2 class="text-primary font-secondary">Thực đơn</h2>
+                <h1 class="display-4 text-uppercase">{{danh_muc01.name}}</h1>
+            </div>
+            <div class="tab-class text-center">
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-3">
+                            {% for san_pham in ds_san_pham %}
+                            <div class="col-lg-6">
+                                <div class="d-flex h-100">
+                                    <div class="flex-shrink-0">
+                                        <img class="img-fluid" src="/media/{{san_pham.image|safe}}" alt="" style="width: 150px;" data-bs-toggle="modal" data-bs-target="#sp{{san_pham.id}}">
+                                        <h4 class="bg-dark text-primary p-2 m-0">{{san_pham.price}}</h4>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center text-start bg-secondary border-inner px-4">
+                                        <h5 class="text-uppercase" data-bs-toggle="modal" data-bs-target="#sp{{san_pham.id}}">{{san_pham.name}}</h5>
+                                        <span>{{san_pham.description|truncatewords:40}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Products End -->
+    {% for san_pham in ds_san_pham %}
+    <!-- Modal -->
+    <div class="modal fade" id="sp{{san_pham.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-uppercase" id="exampleModalLabel">{{san_pham.name}}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="flex-shrink-0 float-start">
+                        <img class="img-fluid me-4" src="/media/{{san_pham.image|safe}}" alt="" style="width: 240px;">
+                    </div>
+                    <div class="d-flex flex-column justify-content-center text-start">
+                        <h5 class="text-uppercase">{{san_pham.name}}</h5>
+                        <h4 class="text-primary">{{san_pham.price|intcomma}} VND</h4>
+                        <span>{{san_pham.description}}</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">ĐÓNG</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal END-->
+    {% endfor %}
+    
+
+    {% endblock %}

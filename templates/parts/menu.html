@@ -1,0 +1,26 @@
+
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+        <a href="{% url 'app_shop:trang-chu' %}" class="navbar-brand d-block d-lg-none">
+            <h1 class="m-0 text-uppercase text-white"><i class="fas fa-mug-hot fs-1 text-primary me-3"></i>CoffeeShop</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto mx-lg-auto py-0">
+                <a href="{% url 'app_shop:trang-chu' %}" class="nav-item nav-link active">Trang chủ</a>
+                <a href="{% url 'app_shop:gioi-thieu' %}" class="nav-item nav-link">Giới thiệu</a>
+                <a href="/" class="nav-item nav-link">Tin tức</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sản phẩm</a>
+                    <div class="dropdown-menu m-0">
+                        {%for danh_muc in ds_danh_muc %}
+                            <a href="{% url 'app_shop:danh-sach-san-pham' danh_muc_id=danh_muc.id %}" class="dropdown-item">{{danh_muc.name}}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <a href="{% url 'app_shop:lien-he' %}" class="nav-item nav-link">Liên hệ</a>
+                <a href="{% url 'app_shop:dang-ky' %}" class="nav-item nav-link">Đăng ký</a>
+            </div>
+        </div>
+    </nav>
